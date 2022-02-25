@@ -1,0 +1,14 @@
+body{
+    width: 300px;
+    height: 200px;
+    background: bisque;
+    animation: mymove 5s infinite;
+    text-align: center;
+}
+
+
+
+@keyframes mymove {
+    from {background-color: black;}
+    to {background-color: blueviolet;}
+}
