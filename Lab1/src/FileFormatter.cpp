@@ -53,7 +53,7 @@ void FileFormatter::spacer(string& buff, int current_length, ofstream& output){
 
 int FileFormatter::text_align_center(string output_filename){
     ofstream output;
-    output.open( output_filename = R"(D:\Coding\C++\4sem\Lab1\files\output\)" + output_filename + ".txt");
+    output.open( output_filename = R"(/home/yevgeniy/Work_Study/Polytech/C++/Cpp_Labs/Lab1/files/output/)" + output_filename + ".txt");
     int counter = 0;
     string buff;
     int current_length = 0;

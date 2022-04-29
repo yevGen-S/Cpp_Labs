@@ -43,6 +43,13 @@ vector<string> read_from_file(string& input_filename){
     return words;
 }
 
+void spacer(string& buff, int current_length, ofstream& output,int width){
+    int diff;
+    diff = (width - current_length) / 2;
+    string space = " ";
+    output << (space * diff) + buff + (space * diff) + '\n';
+    buff.clear();
+}
 
 void print_words(vector <string>& words){
     for(auto &x: words){
@@ -58,50 +65,40 @@ int text_align_center(string& output_filename, vector<string>& words, int width)
     string buff;
     int current_length = 0;
     if(output.is_open()){
-        for(auto &word: words){
-            int width_copy = width;
 
-            if(current_length + word.length() + 1 < width_copy){
-                current_length += (int)word.length() + 1;
-                buff += (word + " ");
+        for(auto &word: words) {
+            if (current_length + word.length() + 1 <= width) {
+                current_length += (int) word.length() + 1;
+                buff += word + " ";
                 continue;
             }
-            else if (word.length() < width_copy){
-                    int diff;
-                    diff = (width - current_length)/2;
-                    string spacer = " ";
-                    output << spacer * diff;
-                    output << buff;
-                    output << spacer * diff;
-                    output << '\n';
-                    buff.clear();
-                    current_length = 0;
+
+            if (current_length) {
+                spacer(buff, current_length, output,width);
             }
 
-            if (word.length() > width){
-                for (auto &letter: word){
-                    output << letter;
+            if (word.length() > width) {
+                for (auto &letter: word) {
                     counter++;
-                    if(counter == width){
+                    buff += letter;
+                    if (counter == width) {
                         counter = 0;
-                        output << '\n';
+                        output << buff + '\n';
+                        buff.clear();
                     }
                 }
-                output << " ";
-                width_copy -= counter;
+                buff += " ";
+                current_length = (int)buff.length();
+                counter =0;
+                continue;
             }
 
-            if(word.length() == width){
-                output << word;
-                output << '\n';
+            if (word.length() <= width){
+                buff += word + " ";
+                current_length = (int)buff.length();
             }
-
-
-            if(!width_copy)
-                output << '\n';
-
         }
-
+        spacer(buff,current_length, output, width);
     }
     else
         return ERROR_OPENING_FILE;
@@ -120,7 +117,7 @@ int main(int argc, char** argv) {
     string output_filename = {"align_center"};
 //    cin >> output_filename;
 
-    output_filename = "D:\\Coding\\C++\\4sem\\Lab1\\files\\output\\" + output_filename;
+    output_filename = R"(/home/yevgeniy/Work_Study/Polytech/C++/Cpp_Labs/Lab1/files/output/)" + output_filename;
     text_align_center(output_filename, text, width);
     return 0;
 }
