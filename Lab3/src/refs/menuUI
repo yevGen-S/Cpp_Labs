@@ -1,0 +1,39 @@
+&menu:
+    id: {0}
+    position: {600,50}
+    size: {600,800}
+    &button:
+        id: {1}
+        position: {200,100}
+        size: {200,50}
+        text: {first button}
+    &button:
+        id: {2}
+        position: {200,250}
+        size: {200,50}
+        text: {next button}
+    &button:
+        id: {3}
+        position: {200,400}
+        size: {200,50}
+        text: {Open submenu}
+        &submenu:
+            id: {4}
+            position: {600,50}
+            size: {600,800}
+            &button:
+                id: {5}
+                position: {200,70}
+                size: {200,50}
+                text: {Go back}
+            &button:
+                id: {6}
+                position: {200,200}
+                size: {200,50}
+                text: {submenu button1}
+            &button:
+                id: {10}
+                position: {200,400}
+                size: {200,50}
+                text: {submenu button2}
+
